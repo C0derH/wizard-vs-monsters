@@ -1,0 +1,134 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'MedievalSharp', cursive;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #AF9083;  
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+p {
+    margin-bottom: 0;
+    margin-top: 0.4em;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.card,
+.card-avatar {
+    border-radius: 8px;
+}
+.card {
+    background-color: #95705F;
+    color: #0C0908;
+    border: 4px solid #3D2E29;
+    display: flex;
+    flex-direction: column;
+    width: 94vw;
+    max-width: 240px;
+    height: 18rem;
+}
+
+.card-avatar {
+    width: 140px;
+    background-color:  #3D2E29;
+    height: 120px;
+    margin: auto;
+}
+.health-container {
+    padding: 0 1em;
+}
+
+.healthbar-outer,
+.healthbar-inner {
+    width: 100%;
+    border: 1px solid #3D2E29;
+    height: 10px;
+}
+
+.healthbar-inner {
+    background-color: aquamarine;
+}
+
+.danger {
+    background-color: red;
+}
+
+.dice-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3D2E29;
+    height: 20%;
+    width: 100%;
+    gap: 1em;
+    padding: 0 0.5em;
+    margin-top: 1em;
+}
+.placeholder-dice,.dice {
+    border: 5px solid #95705F;
+    height:5.5vh;
+    width:5.5vh;
+}
+.dice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 2rem;
+    background-color: #fff;
+}
+.btn {
+    padding: 0.5em 1em;
+    font-size: 1.3rem;
+    font-family: inherit;
+    margin-top: 1em;
+    border: none;
+    background-color: #733635;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn:active {
+    transform: translateY(2px);
+  }
+
+/* Media queries */
+
+@media(min-width:550px){
+    main {
+        margin-top: 4em;
+        flex-direction: row;
+        gap: 3em;
+    }
+    .card {
+        height: 24rem;
+    }
+    .card-avatar {
+        height:150px;
+    }
+    .placeholder-dice,.dice {
+        border: 5px solid #95705F;
+        height:7vh;
+        width:7vh;
+    }
+}
+
