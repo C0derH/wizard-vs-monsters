@@ -1,12 +1,14 @@
 import Character  from "./Character.js";
 import characterData from "./data.js";
 
-document.getElementById("attack-btn").addEventListener("click",handleAttackBtnClick)
+
 
 const monstersArray = ["orc","demon","goblin"]
 
 let isWaiting = false
+
 function handleAttackBtnClick(){
+    console.log("click")
     if(!isWaiting){
         hero.setDiceHtml()
         monster.setDiceHtml()
@@ -37,7 +39,10 @@ function endGame(){
         : `${hero.name} is victorious`
     const endEmoji = hero.dead ? "☠️" : "🔮"
     setTimeout(()=> {
-        document.body.innerHTML = `<h1>${endMessage}${endEmoji}</h1>`
+        document.body.innerHTML = `
+        <h1>${endMessage}${endEmoji}</h1>
+        <button class="btn" onclick = "${restartGame()}">Restart Game</button>
+        `
     },1500)
 }
 
@@ -46,14 +51,37 @@ function getNewMonster(){
     return nextMonsterData ? new Character(nextMonsterData) : {}
 }
 
-const hero = new Character(characterData.hero)
+
+function restartGame(){
+    isWaiting = false
+    setTimeout(()=> {
+        document.body.innerHTML = `
+        <main>
+            <div id="hero"></div>
+            <div id="monster"></div>
+        </main>
+        <button class="btn" id="attack-btn">Attack</button>
+        `
+        monstersArray.push("orc","demon","goblin")
+        monster = getNewMonster()
+        hero = new Character(characterData.hero)
+        renderCharacter()
+        setupAttackBtnEventListener()
+    },1200)
+}
+
+function setupAttackBtnEventListener(){
+    document.getElementById("attack-btn").addEventListener("click",handleAttackBtnClick)
+}
+
+
+
+let hero = new Character(characterData.hero)
 let monster = getNewMonster()
-
-
 
 function renderCharacter(){
     document.getElementById("hero").innerHTML = hero.getCharacterHtml()
     document.getElementById("monster").innerHTML = monster.getCharacterHtml()
 }
-
+setupAttackBtnEventListener()
 renderCharacter()
