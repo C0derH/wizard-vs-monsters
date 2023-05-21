@@ -53,7 +53,6 @@ function endGame(){
 
 
 function handleRestartBtnClick(){
-    isWaiting = false
     setTimeout(()=> {
         document.body.innerHTML = `
         <main>
@@ -67,6 +66,7 @@ function handleRestartBtnClick(){
         hero = new Character(characterData.hero)
         renderCharacter()
         setupAttackBtnEventListener()
+        isWaiting = false
     },1500)
 }
 function setupAttackBtnEventListener(){
