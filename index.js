@@ -6,6 +6,7 @@ import characterData from "./data.js";
 const monstersArray = ["orc","demon","goblin"]
 
 let isWaiting = false
+let isGameEnded = false
 
 function handleAttackBtnClick(){
     if(!isWaiting){
@@ -38,6 +39,7 @@ function getNewMonster(){
 
 function endGame(){
     isWaiting = true
+    isGameEnded = true
     const endMessage = hero.dead && monster.dead ? "Everyone is dead there are no victors"
         : hero.dead ? `${monster.name} is victorious` 
         : `${hero.name} is victorious`
@@ -53,21 +55,24 @@ function endGame(){
 
 
 function handleRestartBtnClick(){
-    setTimeout(()=> {
-        document.body.innerHTML = `
-        <main>
-            <div id="hero"></div>
-            <div id="monster"></div>
-        </main>
-        <button class="btn" id="attack-btn">Attack</button>
-        `
-        monstersArray.push("orc","demon","goblin")
-        monster = getNewMonster()
-        hero = new Character(characterData.hero)
-        renderCharacter()
-        setupAttackBtnEventListener()
+    if(isGameEnded){
         isWaiting = false
-    },1500)
+        isGameEnded = false
+        setTimeout(()=> {
+            document.body.innerHTML = `
+            <main>
+                <div id="hero"></div>
+                <div id="monster"></div>
+            </main>
+            <button class="btn" id="attack-btn">Attack</button>
+            `
+            monstersArray.push("orc","demon","goblin")
+            monster = getNewMonster()
+            hero = new Character(characterData.hero)
+            renderCharacter()
+            setupAttackBtnEventListener()
+        },1500)
+    }
 }
 function setupAttackBtnEventListener(){
     document.getElementById("attack-btn").addEventListener("click",handleAttackBtnClick)
