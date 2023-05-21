@@ -32,6 +32,11 @@ function handleAttackBtnClick(){
     }
 }
 
+function getNewMonster(){
+    const nextMonsterData = characterData[monstersArray.shift()]
+    return nextMonsterData ? new Character(nextMonsterData) : {}
+}
+
 function endGame(){
     isWaiting = true
     const endMessage = hero.dead && monster.dead ? "Everyone is dead there are no victors"
@@ -41,18 +46,14 @@ function endGame(){
     setTimeout(()=> {
         document.body.innerHTML = `
         <h1>${endMessage}${endEmoji}</h1>
-        <button class="btn" onclick = "${restartGame()}">Restart Game</button>
+        <button class="btn" id = "restart-btn">Restart Game</button>
         `
+        document.getElementById("restart-btn").addEventListener("click",handleRestartBtnClick)
     },1500)
 }
 
-function getNewMonster(){
-    const nextMonsterData = characterData[monstersArray.shift()]
-    return nextMonsterData ? new Character(nextMonsterData) : {}
-}
 
-
-function restartGame(){
+function handleRestartBtnClick(){
     isWaiting = false
     setTimeout(()=> {
         document.body.innerHTML = `
@@ -67,14 +68,11 @@ function restartGame(){
         hero = new Character(characterData.hero)
         renderCharacter()
         setupAttackBtnEventListener()
-    },1200)
+    },1500)
 }
-
 function setupAttackBtnEventListener(){
     document.getElementById("attack-btn").addEventListener("click",handleAttackBtnClick)
 }
-
-
 
 let hero = new Character(characterData.hero)
 let monster = getNewMonster()
