@@ -8,7 +8,6 @@ const monstersArray = ["orc","demon","goblin"]
 let isWaiting = false
 
 function handleAttackBtnClick(){
-    console.log("click")
     if(!isWaiting){
         hero.setDiceHtml()
         monster.setDiceHtml()
